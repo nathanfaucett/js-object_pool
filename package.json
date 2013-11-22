@@ -1,0 +1,17 @@
+{
+  "name": "utils-js",
+  "version": "0.0.2",
+  "description": "some handy utility functions, saves functions on top of node's default util package",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lonewolfgames/utils.git"
+  },
+  "main": "./src/index.js",
+  "author": "Nathan Faucett",
+  "license": "BSD",
+  "keywords": [
+    "utils.js",
+    "utils"
+  ],
+  "readmeFilename": "README.md"
+}
