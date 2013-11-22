@@ -1,17 +1,24 @@
 {
-  "name": "utils-js",
-  "version": "0.0.2",
-  "description": "some handy utility functions, saves functions on top of node's default util package",
+  "name": "http_error",
+  "version": "0.0.1",
+  "description": "better http errors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lonewolfgames/utils.git"
+    "url": "https://github.com/lonewolfgames/http_error.git"
   },
   "main": "./src/index.js",
   "author": "Nathan Faucett",
   "license": "BSD",
   "keywords": [
-    "utils.js",
-    "utils"
+    "errors",
+    "errors",
+    "http",
+    "HttpError",
+    "http_error.js",
+    "http_error"
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "node-inflect": "~1.0.0"
+  }
 }
