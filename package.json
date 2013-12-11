@@ -4,7 +4,7 @@
   "description": "better http errors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lonewolfgames/http_error.git"
+    "url": "https://github.com/nathanfaucett/http_error.git"
   },
   "main": "./src/index.js",
   "author": "Nathan Faucett",
