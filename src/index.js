@@ -25,7 +25,7 @@ function HttpError(code, message) {
 	
 	this.name = STATUS_NAMES[code];
 	this.statusCode = code;
-	this.message = this.name +": "+ code +" "+ message;
+	this.message = this.name +": "+ code +" "+ (message || STATUS_CODES[code]);
 }
 HttpError.prototype = Object.create(Error.prototype);
 HttpError.prototype.constructor = HttpError;
