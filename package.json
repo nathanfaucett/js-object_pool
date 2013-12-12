@@ -19,6 +19,6 @@
   ],
   "readmeFilename": "README.md",
   "dependencies": {
-    "node-inflect": "~1.0.0"
+    "node-inflect": ""
   }
 }
