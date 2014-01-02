@@ -1,50 +1,55 @@
-var http = require("http"),
-	STATUS_CODES = http.STATUS_CODES,
-	STATUS_NAMES = {},
-	
-	inflect = require("node-inflect");
-
-Object.keys(STATUS_CODES).forEach(function(code){
-	if (code < 400) return;
-	var name = inflect.camelize(STATUS_CODES[code]);
-	
-	if (!/\w+Error$/.test(name)) name += "Error";
-	STATUS_NAMES[code] = name;
-});
 
 
-function HttpError(code, message) {
-	if (code instanceof Error) {
-		message = code.message;
-		code = 500;
-	} else {
-		code || (code = 500);
-	}
-	
-	Error.call(this);
-	
-	this.name = STATUS_NAMES[code];
-	this.statusCode = code;
-	this.message = this.name +": "+ code +" "+ (message || STATUS_CODES[code]);
+function ObjectPool(constructor) {
+
+	this.pooled = [];
+	this.objects = [];
+	this.object = constructor;
 }
-HttpError.prototype = Object.create(Error.prototype);
-HttpError.prototype.constructor = HttpError;
 
 
-HttpError.prototype.toString = function(){
-	
-	return this.message;
+ObjectPool.prototype.create = function() {
+	var pooled = this.pooled,
+		object = pooled.length ? pooled.pop() : new this.object;
+
+	this.objects.push(object);
+
+	return object;
 };
 
 
-HttpError.prototype.toJSON = function(){
-	
-	return {
-		name: this.name,
-		statusCode: this.statusCode,
-		message: this.message
-	};
+ObjectPool.prototype.removeObject = function(object) {
+	var objects = this.objects,
+		pooled = this.pooled,
+		index = objects.indexOf(object);
+
+	if (index > -1) {
+		pooled.push(object);
+		objects.splice(index, 1);
+	}
+
+	return this;
 };
 
 
-module.exports = HttpError;
+ObjectPool.prototype.remove = ObjectPool.prototype.removeObjects = function() {
+
+	for (var i = arguments.length; i--;) this.removeObject(arguments[i]);
+
+	return this;
+};
+
+
+ObjectPool.prototype.clear = function() {
+	var objects = this.objects,
+		pooled = this.pooled,
+		i;
+
+	for (i = objects.length; i--;) pooled.push(objects[i]);
+	objects.length = 0;
+
+	return this;
+};
+
+
+module.exports = ObjectPool;
