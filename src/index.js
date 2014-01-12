@@ -13,7 +13,6 @@ ObjectPool.prototype.create = function() {
 		object = pooled.length ? pooled.pop() : new this.object;
 
 	this.objects.push(object);
-
 	return object;
 };
 
@@ -35,7 +34,6 @@ ObjectPool.prototype.removeObject = function(object) {
 ObjectPool.prototype.remove = ObjectPool.prototype.removeObjects = function() {
 
 	for (var i = arguments.length; i--;) this.removeObject(arguments[i]);
-
 	return this;
 };
 
