@@ -1,18 +1,22 @@
 {
   "name": "object_pool",
-  "version": "1.0.0",
-  "description": "object pooling",
+  "version": "0.0.1",
+  "description": "Object pooling for the browser and node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nathanfaucett/object_pool.git"
   },
-  "main": "./src/index.js",
-  "author": "Nathan Faucett",
-  "license": "BSD",
+  "main": "src/index.js",
   "keywords": [
-    "object",
-    "pool",
-    "pooling"
+    "object_pool",
+    "object_pool.js"
   ],
-  "readmeFilename": "README.md"
+  "author": "Nathan Faucett",
+  "license": "BSD-2-Clause",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "",
+    "grunt-jsbeautifier": ""
+  }
 }
+
