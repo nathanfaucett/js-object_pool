@@ -1,5 +1,3 @@
-
-
 function ObjectPool(constructor) {
 
     this.pooled = [];
@@ -11,7 +9,7 @@ function ObjectPool(constructor) {
 ObjectPool.prototype.create = function() {
     var pooled = this.pooled,
         object = pooled.length ? pooled.pop() : new this.constructor;
-    
+
     this.objects.push(object);
     return object;
 };
