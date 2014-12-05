@@ -5,15 +5,14 @@ function ObjectPool(constructor) {
     this.constructor = constructor;
 }
 
-
 ObjectPool.prototype.create = function() {
     var pooled = this.pooled,
-        object = pooled.length ? pooled.pop() : new this.constructor;
+        objects = this.objects,
+        object = pooled.length !== 0 ? pooled.pop() : new this.constructor();
 
-    this.objects.push(object);
+    objects[objects.length] = object;
     return object;
 };
-
 
 ObjectPool.prototype.removeObject = function(object) {
     var objects = this.objects,
@@ -21,34 +20,30 @@ ObjectPool.prototype.removeObject = function(object) {
         index = objects.indexOf(object);
 
     if (index > -1) {
-        pooled.push(object);
+        pooled[pooled.length] = object;
         objects.splice(index, 1);
     }
 
     return this;
 };
 
-
 ObjectPool.prototype.remove = ObjectPool.prototype.removeObjects = function() {
     var i = arguments.length;
 
     while (i--) this.removeObject(arguments[i]);
-
     return this;
 };
-
 
 ObjectPool.prototype.clear = function() {
     var objects = this.objects,
         pooled = this.pooled,
         i = objects.length;
 
-    while (i--) pooled.push(objects[i]);
+    while (i--) pooled[pooled.length] = objects[i];
     objects.length = 0;
 
     return this;
 };
-
 
 ObjectPool.prototype.clearForEach = function(fn) {
     var objects = this.objects,
@@ -59,14 +54,13 @@ ObjectPool.prototype.clearForEach = function(fn) {
     while (i--) {
         object = objects[i];
 
-        pooled.push(object);
+        pooled[pooled.length] = object;
         fn(object);
     }
     objects.length = 0;
 
     return this;
 };
-
 
 ObjectPool.prototype.empty = function() {
 
